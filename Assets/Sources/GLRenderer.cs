@@ -21,7 +21,7 @@ public class GLRenderer : MonoBehaviour
         }
     }
 
-    public void DrawResults(PoseNet.Pose[] poses)
+    public void DrawResults(PoseNet.Pose[] poses, float minPoseConfidence = 0.5f)
     {
         CreateLineMaterial();
         lineMaterial.SetPass(0);
@@ -29,7 +29,6 @@ public class GLRenderer : MonoBehaviour
         GL.MultMatrix(transform.localToWorldMatrix);
         GL.Begin(GL.QUADS);
         GL.Color(Color.red);
-        float minPoseConfidence = 0.5f;
 
         foreach (var pose in poses)
         {
@@ -90,7 +89,7 @@ public class GLRenderer : MonoBehaviour
         foreach (var keypoint in adjacentKeyPoints)
         {
             DrawLine2D(new Vector2(keypoint.Item1.position.x * scale, keypoint.Item1.position.y * scale),
-                       new Vector2(keypoint.Item2.position.x * scale, keypoint.Item2.position.y * scale), 0.03f);
+                       new Vector2(keypoint.Item2.position.x * scale, keypoint.Item2.position.y * scale), 0.02f);
         }
     }
 

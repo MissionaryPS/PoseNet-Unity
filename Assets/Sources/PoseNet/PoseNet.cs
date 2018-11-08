@@ -33,6 +33,8 @@ public partial class PoseNet
             .ToDictionary(p => p.k, p => p.v);
 
         connectedPartNames = new Tuple<string, string>[] {
+            //Tuple.Create("nose", "leftEye"), Tuple.Create("leftEye", "leftEar"), 
+            //Tuple.Create("nose", "rightEye"), Tuple.Create("rightEye", "rightEar"), 
             Tuple.Create("leftHip", "leftShoulder"), Tuple.Create("leftElbow", "leftShoulder"),
             Tuple.Create("leftElbow", "leftWrist"), Tuple.Create("leftHip", "leftKnee"),
             Tuple.Create("leftKnee", "leftAnkle"), Tuple.Create("rightHip", "rightShoulder"),
