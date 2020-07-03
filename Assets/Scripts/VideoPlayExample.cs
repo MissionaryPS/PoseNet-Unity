@@ -18,9 +18,12 @@ public class VideoPlayExample : MonoBehaviour {
 	static int detectWidth = 256;
 	static int detectHeight = 256;
 
+    [SerializeField]
 	GLRenderer gl;
-	
-	PoseNet posenet = new PoseNet();
+    [SerializeField]
+    GameObject vrmModel;
+
+    PoseNet posenet = new PoseNet();
 	PoseNet.Pose[] poses;
 	float minPoseConfidence = 0.3f;
 	float minPartConfidence = 0.0f;
@@ -64,12 +67,12 @@ public class VideoPlayExample : MonoBehaviour {
 		graph.Import(graphModel.bytes);
 		session = new TFSession(graph);
 
-		gl = GameObject.Find("GLRender").GetComponent<GLRenderer>();
-
-		var vroid = GameObject.Find("VRoid");
-		Dictionary<string, GameObject> tmp = new Dictionary<string, GameObject>();
-		GetJoints(vroid, ref tmp);
-		dst["hips"]       = tmp["J_Bip_C_Hips"];
+        //ここからtakasaka
+        Debug.Log(vrmModel.name);
+        Dictionary<string, GameObject> tmp = new Dictionary<string, GameObject>();
+		GetJoints(vrmModel, ref tmp);
+        
+        dst["hips"]       = tmp["J_Bip_C_Hips"];
 		dst["spine"]      = tmp["J_Bip_C_Spine"];
 		dst["chest"]      = tmp["J_Bip_C_Chest"];
 		dst["upperChest"] = tmp["J_Bip_C_UpperChest"];
@@ -81,11 +84,13 @@ public class VideoPlayExample : MonoBehaviour {
 		dst["upperLegL"]  = tmp["J_Bip_L_UpperLeg"];	dst["upperLegR"]  = tmp["J_Bip_R_UpperLeg"];
 		dst["lowerLegL"]  = tmp["J_Bip_L_LowerLeg"];	dst["lowerLegR"]  = tmp["J_Bip_R_LowerLeg"];
 		dst["footL"]      = tmp["J_Bip_L_Foot"];		dst["footR"]      = tmp["J_Bip_R_Foot"];
+        //ここまでtakasaka
 	}
 
 	Texture2D texture;
 
 	void Update () {
+        
 		if(IsWebcam){
 			var color32 = webcamTexture.GetPixels32();
 			texture.SetPixels32(color32);
@@ -101,7 +106,10 @@ public class VideoPlayExample : MonoBehaviour {
 		if (isPosing) return;
 		isPosing = true;
 		StartCoroutine("PoseUpdate", texture);
+        
 	}
+
+
 
 	Dictionary<string, PoseNet.Keypoint> src = new Dictionary<string, PoseNet.Keypoint>();
 	Dictionary<string, Vector3> joint = new Dictionary<string, Vector3>();
@@ -141,6 +149,7 @@ public class VideoPlayExample : MonoBehaviour {
 
         isPosing = false;
 
+        //ここからtakasakaのコード
 		if(poses.Length > 0 && poses[0].score >= minPoseConfidence){
 			var pose = poses[0];
 
@@ -307,6 +316,7 @@ public class VideoPlayExample : MonoBehaviour {
 				}
 			}
         }
+        //ここまでtakasakaのコード
 
         yield return null;
     }
