@@ -8,7 +8,7 @@ Assets/ML-Agents*
 Assets/VRM*
 
 Assets/Resources/VRMmodel/*
-!*.vrm
+!Assets/Resources/VRMmodel/*.vrm
 
 
 # Visual Studio cache directory
