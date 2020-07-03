@@ -3,13 +3,17 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+
 Assets/AssetStoreTools*
+
+# Require Packages
 Assets/ML-Agents*
 Assets/VRM*
 
+# VRM model
 Assets/Resources/VRMmodel/*
 !Assets/Resources/VRMmodel/*.vrm
-
+!Assets/Resources/VRMmodel/*.prefab
 
 # Visual Studio cache directory
 .vs/
