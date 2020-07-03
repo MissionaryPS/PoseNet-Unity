@@ -7,6 +7,10 @@ Assets/AssetStoreTools*
 Assets/ML-Agents*
 Assets/VRM*
 
+Assets/Resources/VRMmodel/*
+!*.vrm
+
+
 # Visual Studio cache directory
 .vs/
 .vscode/
