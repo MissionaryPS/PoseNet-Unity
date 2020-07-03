@@ -34,6 +34,8 @@ public class VideoPlayExample : MonoBehaviour {
 	Dictionary<string, GameObject> dst = new Dictionary<string, GameObject>();
 
     void Start () {
+        webcamTexture = new WebCamTexture(WebCamTexture.devices[0].name);
+
 		Application.runInBackground = true;
 
 		RectTransform rectTransform = GetComponent<RectTransform>();
