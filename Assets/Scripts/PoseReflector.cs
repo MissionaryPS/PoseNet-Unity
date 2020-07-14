@@ -18,6 +18,22 @@ public class PoseReflector : MonoBehaviour
     void PoseNet2VRM(PoseNet.Pose[] poses)
     {
 
+        //shoulder
+
+        //hips
+
+        //right upper arm
+        //right under arm
+        //left upper arm
+        //left under arm
+
+        //right upper leg
+        //right under leg
+        //left upper leg
+        //left under leg
+
+
+
     }
 
 }
