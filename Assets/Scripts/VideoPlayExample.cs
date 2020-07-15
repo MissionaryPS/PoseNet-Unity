@@ -33,6 +33,8 @@ public class VideoPlayExample : MonoBehaviour {
 
 	Dictionary<string, GameObject> dst = new Dictionary<string, GameObject>();
 
+    float nowTime;
+
     void Start () {
         webcamTexture = new WebCamTexture(WebCamTexture.devices[0].name);
 
@@ -69,8 +71,10 @@ public class VideoPlayExample : MonoBehaviour {
 		graph.Import(graphModel.bytes);
 		session = new TFSession(graph);
 
-        //ここからtakasaka
         Debug.Log(vrmModel.name);
+        nowTime = Time.time;
+        
+        /*/ここからtakasaka
         Dictionary<string, GameObject> tmp = new Dictionary<string, GameObject>();
 		GetJoints(vrmModel, ref tmp);
         
@@ -86,7 +90,7 @@ public class VideoPlayExample : MonoBehaviour {
 		dst["upperLegL"]  = tmp["J_Bip_L_UpperLeg"];	dst["upperLegR"]  = tmp["J_Bip_R_UpperLeg"];
 		dst["lowerLegL"]  = tmp["J_Bip_L_LowerLeg"];	dst["lowerLegR"]  = tmp["J_Bip_R_LowerLeg"];
 		dst["footL"]      = tmp["J_Bip_L_Foot"];		dst["footR"]      = tmp["J_Bip_R_Foot"];
-        //ここまでtakasaka
+        //ここまでtakasaka*/
 	}
 
 	Texture2D texture;
@@ -117,6 +121,7 @@ public class VideoPlayExample : MonoBehaviour {
 	Dictionary<string, Vector3> joint = new Dictionary<string, Vector3>();
 	Dictionary<int, Dictionary<string, Vector3>> jointsAvg = new Dictionary<int, Dictionary<string, Vector3>>();
 	int jointsCount = 10, jointsIndex = 0;
+
 
     IEnumerator PoseUpdate(Texture2D texture)
     {
@@ -151,7 +156,7 @@ public class VideoPlayExample : MonoBehaviour {
 
         isPosing = false;
 
-        //ここからtakasakaのコード
+        /*/ここからtakasakaのコード
 		if(poses.Length > 0 && poses[0].score >= minPoseConfidence){
 			var pose = poses[0];
 
@@ -318,8 +323,9 @@ public class VideoPlayExample : MonoBehaviour {
 				}
 			}
         }
-        //ここまでtakasakaのコード
-
+        //ここまでtakasakaのコード*/
+        Debug.Log("pose update:" + Time.time + ", time:" + (Time.time-nowTime) + ", FPS:" + 1/(Time.time - nowTime));
+        nowTime = Time.time;
         yield return null;
     }
 

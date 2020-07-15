@@ -21,7 +21,7 @@ public class ReadImageExample : MonoBehaviour {
 		graph.Import (graphModel.bytes);
 		var session = new TFSession (graph);
 
-        Texture2D image = Resources.Load("tennis_in_crowd") as Texture2D;
+        Texture2D image = Resources.Load("guitar_dummy") as Texture2D;
         image = scaled(image, ImageSize, ImageSize);
         var tensor = TransformInput(image.GetPixels32(), ImageSize, ImageSize);
 
