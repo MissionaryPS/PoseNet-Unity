@@ -11,8 +11,11 @@ public class ReadImageExample : MonoBehaviour {
     PoseNet posenet = new PoseNet();
     PoseNet.Pose[] poses;
 
-    public GameObject glgo;
-    private GLRenderer gl;
+    [SerializeField]
+    GLRenderer gl;
+
+    [SerializeField]
+    string imageName;
 
     void Start () {
 
@@ -21,7 +24,7 @@ public class ReadImageExample : MonoBehaviour {
 		graph.Import (graphModel.bytes);
 		var session = new TFSession (graph);
 
-        Texture2D image = Resources.Load("guitar_dummy") as Texture2D;
+        Texture2D image = Resources.Load(imageName) as Texture2D;
         image = scaled(image, ImageSize, ImageSize);
         var tensor = TransformInput(image.GetPixels32(), ImageSize, ImageSize);
 
@@ -48,7 +51,6 @@ public class ReadImageExample : MonoBehaviour {
             outputStride: 16, maxPoseDetections: 15,
             scoreThreshold: 0.5f, nmsRadius: 20);
 
-        gl = glgo.GetComponent<GLRenderer>();
     }
 
     public void OnRenderObject()
