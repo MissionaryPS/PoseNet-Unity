@@ -354,6 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsWebcam: 1
   gl: {fileID: 336958260}
+  pr: {fileID: 35645975}
   vrmModel: {fileID: 1617522465}
 --- !u!222 &166386195
 CanvasRenderer:
